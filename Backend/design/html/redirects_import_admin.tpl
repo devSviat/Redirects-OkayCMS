@@ -62,8 +62,8 @@
                         <div class="input_file_container">
                             <input name="csv_file" class="file_upload input_file" id="redirects-import-file" type="file" accept=".csv,text/csv">
                             <label tabindex="0" for="redirects-import-file" class="input_file_trigger">
-                                {include file='svg_icon.tpl' svgId='upload'}
-                                <span>{$btr->button_select_file|escape}</span>
+                                {* {include file='svg_icon.tpl' svgId='upload'} *}
+                                <span>{$btr->sviat_redirects__button_select_file|escape}</span>
                             </label>
                         </div>
                         <p class="input_file_return"></p>

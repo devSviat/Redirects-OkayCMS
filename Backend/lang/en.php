@@ -10,6 +10,7 @@ $lang['sviat_redirects__add'] = 'Add redirect';
 $lang['sviat_redirects__import'] = 'Import';
 $lang['sviat_redirects__export'] = 'Export';
 $lang['sviat_redirects__import_title'] = 'Import redirects from CSV';
+$lang['sviat_redirects__button_select_file'] = 'Select file';
 $lang['sviat_redirects__import_submit'] = 'Import';
 $lang['sviat_redirects__import_download_template'] = 'Download template';
 $lang['sviat_redirects__import_hint'] = 'Upload a CSV file. Delimiters "," and ";" are supported.';

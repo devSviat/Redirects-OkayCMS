@@ -10,6 +10,7 @@ $lang['sviat_redirects__add'] = 'Додати редірект';
 $lang['sviat_redirects__import'] = 'Імпорт';
 $lang['sviat_redirects__export'] = 'Експорт';
 $lang['sviat_redirects__import_title'] = 'Імпорт редіректів з CSV';
+$lang['sviat_redirects__button_select_file'] = 'Вибрати файл';
 $lang['sviat_redirects__import_submit'] = 'Імпортувати';
 $lang['sviat_redirects__import_download_template'] = 'Завантажити шаблон';
 $lang['sviat_redirects__import_hint'] = 'Завантажте CSV-файл. Підтримуються розділювачі "," або ";".';
