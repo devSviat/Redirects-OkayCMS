@@ -132,6 +132,8 @@ class RedirectsAdmin extends IndexAdmin
             'status_desc',
             'enabled',
             'enabled_desc',
+            'created_at',
+            'created_at_desc',
             'updated_at',
             'updated_at_desc',
         ];

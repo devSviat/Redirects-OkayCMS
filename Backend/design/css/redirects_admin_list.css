@@ -1,0 +1,100 @@
+/* Redirects list: layout + action icons (scoped to module list only) */
+
+/* «Дата»: заголовок і значення по центру */
+.sviat_redirects_admin_list .okay_list_heading.sviat_redirects_col_created,
+.sviat_redirects_admin_list .okay_list_boding.sviat_redirects_col_created {
+    text-align: center;
+}
+
+.sviat_redirects_admin_list .okay_list_heading.sviat_redirects_col_created a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Вужча колонка «Дії» (було 100–110px у .okay_list_setting / .okay_list_products_setting) */
+.sviat_redirects_admin_list .okay_list_heading.sviat_redirects_col_actions,
+.sviat_redirects_admin_list .okay_list_boding.sviat_redirects_col_actions {
+    width: 88px;
+    min-width: 88px;
+    max-width: 88px;
+    flex: 0 0 88px;
+    padding-left: 4px;
+    padding-right: 4px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.sviat_redirects_admin_list .sviat_redirects_actions_inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 2px;
+}
+
+.sviat_redirects_admin_list .okay_list_setting .setting_icon {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+/* Іконка мови: SVG по центру в клітинці */
+.sviat_redirects_admin_list .okay_list_setting .sviat_redirects_icon_lang {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sviat_redirects_admin_list .okay_list_setting .sviat_redirects_icon_lang svg {
+    display: block;
+    margin: 0 auto;
+}
+
+.sviat_redirects_admin_list .okay_list_setting .sviat_redirects_icon_enabled {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sviat_redirects_admin_list .okay_list_setting .sviat_redirects_icon_enabled svg {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Неактивний стан — світліший фон і м’якший колір іконки */
+.sviat_redirects_admin_list .okay_list_setting .sviat_redirects_icon_enabled:not(.fn_active_class),
+.sviat_redirects_admin_list .okay_list_setting .sviat_redirects_icon_lang:not(.fn_active_class) {
+    background: #f4f6f9;
+    border-color: #e6eaef;
+    color: #aeb6c2;
+}
+
+/* Кольори кнопок */
+.sviat_redirects_admin_list .okay_list_setting .sviat_redirects_icon_enabled.fn_active_class,
+.sviat_redirects_admin_list .okay_list_setting .sviat_redirects_icon_enabled.fn_active_class:hover {
+    background: #43914d;
+    border-color: #43914d;
+    color: #fff;
+}
+
+.sviat_redirects_admin_list .okay_list_setting .sviat_redirects_icon_enabled:not(.fn_active_class):hover {
+    border-color: #43914d;
+    color: #43914d;
+}
+
+.sviat_redirects_admin_list .okay_list_setting .sviat_redirects_icon_lang.fn_active_class,
+.sviat_redirects_admin_list .okay_list_setting .sviat_redirects_icon_lang.fn_active_class:hover {
+    background: #4d86e9;
+    border-color: #4d86e9;
+    color: #fff;
+}
+
+.sviat_redirects_admin_list .okay_list_setting .sviat_redirects_icon_lang:not(.fn_active_class):hover {
+    border-color: #4d86e9;
+    color: #4d86e9;
+}

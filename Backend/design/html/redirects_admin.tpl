@@ -85,51 +85,49 @@
                 <form class="fn_form_list fn_fast_button" method="post">
                     <input type="hidden" name="session_id" value="{$smarty.session.id}">
 
-                    <div class="okay_list products_list">
+                    <div class="okay_list products_list sviat_redirects_admin_list">
                         <div class="okay_list_head">
                             <div class="okay_list_heading okay_list_check">
                                 <input class="hidden_check fn_check_all" type="checkbox" id="check_all_1" value="">
                                 <label class="okay_ckeckbox" for="check_all_1"></label>
                             </div>
-                            <div class="okay_list_heading" style="width: 20%;">
+                            <div class="okay_list_heading" style="width: 18%;">
                                 {if $sort == 'name'}{$sort_link='name_desc'}{else}{$sort_link='name'}{/if}
                                 <a href="{url sort=$sort_link page=null}" class="{if $sort == 'name' || $sort == 'name_desc'}active{/if}">
                                     {$btr->general_name|escape} {include file='svg_icon.tpl' svgId='sorting'}
                                 </a>
                             </div>
-                            <div class="okay_list_heading" style="width: 22%;">
+                            <div class="okay_list_heading" style="width: 21%;">
                                 {if $sort == 'from_url'}{$sort_link='from_url_desc'}{else}{$sort_link='from_url'}{/if}
                                 <a href="{url sort=$sort_link page=null}" class="{if $sort == 'from_url' || $sort == 'from_url_desc'}active{/if}">
                                     {$btr->sviat_redirects__label_from|escape} {include file='svg_icon.tpl' svgId='sorting'}
                                 </a>
                             </div>
-                            <div class="okay_list_heading" style="width: 22%;">
+                            <div class="okay_list_heading" style="width: 21%;">
                                 {if $sort == 'to_url'}{$sort_link='to_url_desc'}{else}{$sort_link='to_url'}{/if}
                                 <a href="{url sort=$sort_link page=null}" class="{if $sort == 'to_url' || $sort == 'to_url_desc'}active{/if}">
                                     {$btr->sviat_redirects__label_to|escape} {include file='svg_icon.tpl' svgId='sorting'}
                                 </a>
                             </div>
-                            <div class="okay_list_heading" style="width: 8%;">
+                            <div class="okay_list_heading" style="width: 7%;">
                                 {if $sort == 'hits'}{$sort_link='hits_desc'}{else}{$sort_link='hits'}{/if}
                                 <a href="{url sort=$sort_link page=null}" class="{if $sort == 'hits' || $sort == 'hits_desc'}active{/if}">
                                     {$btr->sviat_redirects__hits|escape} {include file='svg_icon.tpl' svgId='sorting'}
                                 </a>
                             </div>
-                            <div class="okay_list_heading" style="width: 10%;">
+                            <div class="okay_list_heading" style="width: 9%;">
                                 {if $sort == 'status'}{$sort_link='status_desc'}{else}{$sort_link='status'}{/if}
                                 <a href="{url sort=$sort_link page=null}" class="{if $sort == 'status' || $sort == 'status_desc'}active{/if}">
                                     {$btr->sviat_redirects__status|escape} {include file='svg_icon.tpl' svgId='sorting'}
                                 </a>
                             </div>
-                            <div class="okay_list_heading" style="width: 8%;">
-                                {if $sort == 'enabled'}{$sort_link='enabled_desc'}{else}{$sort_link='enabled'}{/if}
-                                <a href="{url sort=$sort_link page=null}" class="{if $sort == 'enabled' || $sort == 'enabled_desc'}active{/if}">
-                                    {$btr->sviat_redirects__activity|escape} {include file='svg_icon.tpl' svgId='sorting'}
+                            <div class="okay_list_heading sviat_redirects_col_created" style="width: 12%;">
+                                {if $sort == 'created_at'}{$sort_link='created_at_desc'}{else}{$sort_link='created_at'}{/if}
+                                <a href="{url sort=$sort_link page=null}" class="{if $sort == 'created_at' || $sort == 'created_at_desc'}active{/if}">
+                                    {$btr->general_date|escape} {include file='svg_icon.tpl' svgId='sorting'}
                                 </a>
                             </div>
-                            <div class="okay_list_heading" style="width: 6%;">
-                                {$btr->sviat_redirects__is_lang_short|default:'Lang'|escape}
-                            </div>
+                            <div class="okay_list_heading okay_list_setting okay_list_products_setting sviat_redirects_col_actions">{$btr->general_activities|escape}</div>
                             <div class="okay_list_heading okay_list_close"></div>
                         </div>
 
@@ -141,36 +139,35 @@
                                             <input class="hidden_check" type="checkbox" id="id_{$redirect->id}" name="check[]" value="{$redirect->id}">
                                             <label class="okay_ckeckbox" for="id_{$redirect->id}"></label>
                                         </div>
-                                        <div class="okay_list_boding" style="width: 20%; text-align: left;">
+                                        <div class="okay_list_boding" style="width: 18%; text-align: left;">
                                             <a href="{url controller='Sviat.Redirects.RedirectAdmin' id=$redirect->id return=$smarty.server.REQUEST_URI}">{$redirect->name|escape}</a>
                                         </div>
-                                        <div class="okay_list_boding" style="width: 22%; word-break: break-all; text-align: left;">{$redirect->from_url|escape}</div>
-                                        <div class="okay_list_boding" style="width: 22%; word-break: break-all; text-align: left;">{$redirect->to_url|escape}</div>
-                                        <div class="okay_list_boding" style="width: 8%;">{$redirect->hits|default:0}</div>
-                                        <div class="okay_list_boding" style="width: 10%;">
+                                        <div class="okay_list_boding" style="width: 21%; word-break: break-all; text-align: left;">{$redirect->from_url|escape}</div>
+                                        <div class="okay_list_boding" style="width: 21%; word-break: break-all; text-align: left;">{$redirect->to_url|escape}</div>
+                                        <div class="okay_list_boding" style="width: 7%;">{$redirect->hits|default:0}</div>
+                                        <div class="okay_list_boding" style="width: 9%;">
                                             {if $redirect->status == 301}
                                                 <span class="tag tag-info">301</span>
                                             {else}
                                                 <span class="tag tag-warning">302</span>
                                             {/if}
                                         </div>
-                                        <div class="okay_list_boding" style="width: 8%;">
-                                            <label class="switch switch-default">
-                                                <input class="switch-input fn_ajax_action {if $redirect->enabled}fn_active_class{/if}" data-controller="Sviat.Redirects.RedirectsEntity" data-action="enabled" data-id="{$redirect->id}" name="enabled" value="1" type="checkbox" {if $redirect->enabled}checked{/if}>
-                                                <span class="switch-label"></span>
-                                                <span class="switch-handle"></span>
-                                            </label>
+                                        <div class="okay_list_boding sviat_redirects_col_created" style="width: 12%;">
+                                            {$redirect->created_at|default:'—'|escape}
                                         </div>
-                                        <div class="okay_list_boding" style="width: 6%;">
-                                            {if $redirect->is_lang}
-                                                <span class="tag tag-success" title="{$btr->sviat_redirects__yes|default:'Yes'|escape}">✓</span>
-                                            {else}
-                                                <span class="tag" title="{$btr->sviat_redirects__no|default:'No'|escape}">—</span>
-                                            {/if}
+                                        <div class="okay_list_boding okay_list_setting okay_list_products_setting sviat_redirects_col_actions">
+                                            <div class="sviat_redirects_actions_inner">
+                                                <button type="button" data-hint="{$btr->sviat_redirects__activity|escape}" class="setting_icon sviat_redirects_icon_enabled fn_ajax_action {if $redirect->enabled}fn_active_class{/if} hint-bottom-middle-t-info-s-small-mobile hint-anim" data-controller="Sviat.Redirects.RedirectsEntity" data-action="enabled" data-id="{$redirect->id}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-square-rounded-check"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 12l2 2l4 -4" /><path d="M12 3c7.2 0 9 1.8 9 9c0 7.2 -1.8 9 -9 9c-7.2 0 -9 -1.8 -9 -9c0 -7.2 1.8 -9 9 -9" /></svg>
+                                                </button>
+                                                <button type="button" data-hint="{$btr->sviat_redirects__is_lang|escape}" class="setting_icon sviat_redirects_icon_lang fn_ajax_action {if $redirect->is_lang}fn_active_class{/if} hint-bottom-middle-t-info-s-small-mobile hint-anim" data-controller="Sviat.Redirects.RedirectsEntity" data-action="is_lang" data-id="{$redirect->id}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-language"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6.371c0 4.418 -2.239 6.629 -5 6.629" /><path d="M4 6.371h7" /><path d="M5 9c0 2.144 2.252 3.908 6 4" /><path d="M12 20l4 -9l4 9" /><path d="M19.1 18h-6.2" /><path d="M6.694 3l.793 .582" /></svg>
+                                                </button>
+                                            </div>
                                         </div>
                                         <div class="okay_list_boding okay_list_close">
                                             <button data-hint="{$btr->sviat_redirects__delete|escape}" type="button" class="btn_close fn_remove hint-bottom-right-t-info-s-small-mobile hint-anim" data-toggle="modal" data-target="#fn_action_modal" onclick="success_action($(this));">
-                                                {include file='svg_icon.tpl' svgId='delete'}
+                                                {include file='svg_icon.tpl' svgId='trash'}
                                             </button>
                                         </div>
                                     </div>
