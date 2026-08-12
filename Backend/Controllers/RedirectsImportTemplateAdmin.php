@@ -21,10 +21,10 @@ class RedirectsImportTemplateAdmin extends IndexAdmin
         }
 
         fwrite($stream, "\xEF\xBB\xBF");
-        fputcsv($stream, ['from_url', 'to_url', 'name', 'status', 'enabled', 'is_lang', 'type'], ';');
-        fputcsv($stream, ['old-page', 'new-page', 'Example redirect', '301', '1', '0', 'exact'], ';');
-        fputcsv($stream, ['category/$slug', 'products/$slug', 'Pattern example', '301', '1', '0', 'pattern'], ';');
-        fputcsv($stream, ['blenders/nutribullet-as00006902', 'catalog/blenders', 'Multilingual example', '301', '1', '1', 'exact'], ';');
+        fputcsv($stream, ['from_url', 'to_url', 'name', 'status', 'enabled', 'is_lang', 'type'], ';', '"', '\\');
+        fputcsv($stream, ['old-page', 'new-page', 'Example redirect', '301', '1', '0', 'exact'], ';', '"', '\\');
+        fputcsv($stream, ['category/$slug', 'products/$slug', 'Pattern example', '301', '1', '0', 'pattern'], ';', '"', '\\');
+        fputcsv($stream, ['blenders/nutribullet-as00006902', 'catalog/blenders', 'Multilingual example', '301', '1', '1', 'exact'], ';', '"', '\\');
 
         rewind($stream);
         $csv = (string) stream_get_contents($stream);

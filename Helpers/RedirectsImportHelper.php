@@ -36,7 +36,7 @@ class RedirectsImportHelper
         }
 
         $delimiter = $this->detectDelimiter($handle);
-        $header = fgetcsv($handle, 0, $delimiter);
+        $header = fgetcsv($handle, 0, $delimiter, '"', '\\');
 
         $headerMap = $this->buildHeaderMap($header);
         $hasHeader = isset($headerMap['from_url'], $headerMap['to_url']);
@@ -49,7 +49,7 @@ class RedirectsImportHelper
         $batch = [];
         $redirectsEntity = $this->entityFactory->get(RedirectsEntity::class);
 
-        while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {
+        while (($row = fgetcsv($handle, 0, $delimiter, '"', '\\')) !== false) {
             $result['total']++;
             $candidate = $this->buildCandidateFromRow($row, $headerMap);
             if ($candidate === null) {

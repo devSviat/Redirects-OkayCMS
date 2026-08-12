@@ -35,7 +35,7 @@ class RedirectsExportHelper
             'last_hit_at',
             'created_at',
             'updated_at',
-        ], ';');
+        ], ';', '"', '\\');
 
         $redirectsEntity = $this->entityFactory->get(RedirectsEntity::class);
         $page = 1;
@@ -58,7 +58,7 @@ class RedirectsExportHelper
                     (string) ($row->last_hit_at ?? ''),
                     (string) ($row->created_at ?? ''),
                     (string) ($row->updated_at ?? ''),
-                ], ';');
+                ], ';', '"', '\\');
             }
 
             $page++;
