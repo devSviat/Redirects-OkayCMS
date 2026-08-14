@@ -60,6 +60,8 @@
                             {$btr->sviat_redirects__error_empty_url_to|escape}
                         {elseif $message_error == 'used_url'}
                             {$btr->sviat_redirects__used_url|escape}
+                        {elseif $message_error == 'save_failed'}
+                            {$btr->sviat_redirects__save_failed|escape}
                         {else}
                             {$message_error|escape}
                         {/if}

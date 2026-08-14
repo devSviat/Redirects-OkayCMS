@@ -24,8 +24,9 @@ class RedirectAdmin extends IndexAdmin
             }
             if ($error !== '') {
                 $this->design->assign('message_error', $error);
+            } elseif (!$this->persistRedirect($redirectsEntity, $redirect)) {
+                $this->design->assign('message_error', 'save_failed');
             } else {
-                $this->persistRedirect($redirectsEntity, $redirect);
                 $this->postRedirectGet->redirect();
             }
         } else {
@@ -89,7 +90,7 @@ class RedirectAdmin extends IndexAdmin
         return false;
     }
 
-    private function persistRedirect(RedirectsEntity $redirectsEntity, \stdClass $redirect): void
+    private function persistRedirect(RedirectsEntity $redirectsEntity, \stdClass $redirect): bool
     {
         $now = date('Y-m-d H:i:s');
         if ($redirect->name === '') {
@@ -100,14 +101,21 @@ class RedirectAdmin extends IndexAdmin
             $redirect->updated_at = $now;
             $redirectsEntity->update($redirect->id, $redirect);
             $this->postRedirectGet->storeMessageSuccess('updated');
-            return;
+
+            return true;
         }
 
         $redirect->created_at = $now;
         $redirect->updated_at = $now;
-        $newId = (int) $redirectsEntity->add($redirect);
+        $newId = $redirectsEntity->add($redirect);
+        if ($newId === false || (int) $newId < 1) {
+            return false;
+        }
+
         $this->postRedirectGet->storeMessageSuccess('added');
-        $this->postRedirectGet->storeNewEntityId($newId);
+        $this->postRedirectGet->storeNewEntityId((int) $newId);
+
+        return true;
     }
 
     private function normalizePath($value): string

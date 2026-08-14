@@ -28,6 +28,7 @@ $lang['sviat_redirects__added'] = 'Redirect created';
 $lang['sviat_redirects__updated'] = 'Redirect updated';
 $lang['sviat_redirects__delete'] = 'Delete redirect';
 $lang['sviat_redirects__used_url'] = 'This source URL is already used in redirect';
+$lang['sviat_redirects__save_failed'] = 'Could not save to the database (check PHP logs and that table sviat__redirects exists on this environment).';
 
 $lang['sviat_redirects__label_from'] = 'From URL';
 $lang['sviat_redirects__label_to'] = 'To URL';

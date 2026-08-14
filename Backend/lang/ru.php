@@ -28,6 +28,7 @@ $lang['sviat_redirects__added'] = 'Редирект создан';
 $lang['sviat_redirects__updated'] = 'Редирект обновлен';
 $lang['sviat_redirects__delete'] = 'Удалить редирект';
 $lang['sviat_redirects__used_url'] = 'Этот URL-источник уже используется в редиректе';
+$lang['sviat_redirects__save_failed'] = 'Не удалось сохранить в БД (проверьте логи PHP и наличие таблицы sviat__redirects в этом окружении).';
 
 $lang['sviat_redirects__label_from'] = 'URL откуда';
 $lang['sviat_redirects__label_to'] = 'URL куда';
