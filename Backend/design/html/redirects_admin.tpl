@@ -17,6 +17,7 @@
                 <a class="btn btn_small btn-outline-warning" href="{url controller='Sviat.Redirects.RedirectsExportAdmin'}">
                     <span>{$btr->sviat_redirects__export|escape}</span>
                 </a>
+                {include file='redirects_reincarnation.tpl'}
             </div>
         </div>
     </div>
@@ -133,17 +134,37 @@
 
                         <div class="okay_list_body">
                             {foreach $redirects as $redirect}
-                                <div class="okay_list_body_item fn_row">
+                                <div class="okay_list_body_item fn_row{if $redirect->reincarnation_found} sviat_redirects_reincarnated{/if}">
                                     <div class="okay_list_row">
                                         <div class="okay_list_boding okay_list_check">
-                                            <input class="hidden_check" type="checkbox" id="id_{$redirect->id}" name="check[]" value="{$redirect->id}">
+                                            <input class="hidden_check" type="checkbox" id="id_{$redirect->id}" name="check[]" value="{$redirect->id}"{if $redirect->reincarnation_found} checked{/if}>
                                             <label class="okay_ckeckbox" for="id_{$redirect->id}"></label>
                                         </div>
-                                        <div class="okay_list_boding" style="width: 18%; text-align: left;">
+                                        <div class="okay_list_boding{if $redirect->reincarnation_found} sviat_redirects_reincarnation_field{/if}" style="width: 18%; text-align: left;">
                                             <a href="{url controller='Sviat.Redirects.RedirectAdmin' id=$redirect->id return=$smarty.server.REQUEST_URI}">{$redirect->name|escape}</a>
+                                            {if $redirect->reincarnation_found}
+                                                <span class="sviat_redirects_reincarnation_product_tag">
+                                                    <span class="sviat_redirects_reincarnation_product_text">
+                                                        {$btr->sviat_redirects__reincarnation_product_exists|escape}:
+                                                        <strong>{if $redirect->reincarnation_product_sku}{$redirect->reincarnation_product_sku|escape}{else}{$btr->sviat_redirects__reincarnation_sku_missing|escape}{/if}</strong>
+                                                    </span>
+                                                    <a class="sviat_redirects_reincarnation_product_link"
+                                                       href="{url controller=ProductAdmin id=$redirect->reincarnation_product_id return=$smarty.server.REQUEST_URI}"
+                                                       target="_blank"
+                                                       rel="noopener"
+                                                       title="{$btr->sviat_redirects__reincarnation_open_product|escape}"
+                                                       aria-label="{$btr->sviat_redirects__reincarnation_open_product|escape}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                            <path d="M15 3h6v6"></path>
+                                                            <path d="M10 14L21 3"></path>
+                                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                                        </svg>
+                                                    </a>
+                                                </span>
+                                            {/if}
                                         </div>
-                                        <div class="okay_list_boding" style="width: 21%; word-break: break-all; text-align: left;">{$redirect->from_url|escape}</div>
-                                        <div class="okay_list_boding" style="width: 21%; word-break: break-all; text-align: left;">{$redirect->to_url|escape}</div>
+                                        <div class="okay_list_boding{if $redirect->reincarnation_found} sviat_redirects_reincarnation_field{/if}" style="width: 21%; word-break: break-all; text-align: left;">{$redirect->from_url|escape}</div>
+                                        <div class="okay_list_boding{if $redirect->reincarnation_found} sviat_redirects_reincarnation_field{/if}" style="width: 21%; word-break: break-all; text-align: left;">{$redirect->to_url|escape}</div>
                                         <div class="okay_list_boding" style="width: 7%;">{$redirect->hits|default:0}</div>
                                         <div class="okay_list_boding" style="width: 9%;">
                                             {if $redirect->status == 301}
@@ -183,11 +204,11 @@
                                 </div>
                                 <div class="okay_list_option">
                                     <select name="action" class="selectpicker form-control">
-                                        <option value="disable">{$btr->general_do_disable|escape}</option>
+                                        <option value="disable"{if !$reincarnation_selected_count} selected{/if}>{$btr->general_do_disable|escape}</option>
                                         <option value="enable">{$btr->general_do_enable|escape}</option>
                                         <option value="status_301">{$btr->sviat_redirects__set_status_301|default:'Встановити статус 301'|escape}</option>
                                         <option value="status_302">{$btr->sviat_redirects__set_status_302|default:'Встановити статус 302'|escape}</option>
-                                        <option value="delete">{$btr->general_delete|escape}</option>
+                                        <option value="delete"{if $reincarnation_selected_count} selected{/if}>{$btr->general_delete|escape}</option>
                                     </select>
                                 </div>
                             </div>
