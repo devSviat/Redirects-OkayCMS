@@ -38,15 +38,6 @@ class Init extends AbstractInit
         ]);
     }
 
-    /**
-     * Схему не чіпаємо: стан сканування живе поза базою, а SKU й лічильник
-     * меню рахуються на льоту. Метод потрібен лише як явна відмітка, що
-     * перехід на 1.1.0 міграції не має.
-     */
-    public function update_1_1_0()
-    {
-    }
-
     public function init()
     {
         $this->registerBackendController('RedirectsAdmin');
