@@ -1,6 +1,7 @@
 <?php
 
 $lang['sviat_redirects__menu_title'] = 'Redirects';
+$lang['sviat_redirects__save_failed'] = 'Could not save to the database (check PHP logs and that table sviat__redirects exists on this environment).';
 
 $lang['sviat_redirects__title'] = 'Redirects';
 $lang['sviat_redirects__empty_list'] = 'No redirects yet';
@@ -28,7 +29,6 @@ $lang['sviat_redirects__added'] = 'Redirect created';
 $lang['sviat_redirects__updated'] = 'Redirect updated';
 $lang['sviat_redirects__delete'] = 'Delete redirect';
 $lang['sviat_redirects__used_url'] = 'This source URL is already used in redirect';
-$lang['sviat_redirects__save_failed'] = 'Could not save to the database (check PHP logs and that table sviat__redirects exists on this environment).';
 
 $lang['sviat_redirects__label_from'] = 'From URL';
 $lang['sviat_redirects__label_to'] = 'To URL';
@@ -94,3 +94,13 @@ $lang['sviat_redirects__import_instruction_example_pattern'] = 'Pattern example'
 
 $lang['sviat_redirects__yes'] = 'Yes, enabled';
 $lang['sviat_redirects__no'] = 'No, disabled';
+
+$lang['sviat_redirects__reincarnation'] = 'Reincarnation';
+$lang['sviat_redirects__reincarnation_hint'] = 'Compare exact redirect URLs with actual product URLs stored in the database';
+$lang['sviat_redirects__reincarnation_running'] = 'Checking...';
+$lang['sviat_redirects__reincarnation_error'] = 'The redirect check could not be completed';
+$lang['sviat_redirects__reincarnation_busy'] = 'The check is already running in another process';
+$lang['sviat_redirects__reincarnation_last_check'] = 'Last check';
+$lang['sviat_redirects__reincarnation_product_exists'] = 'Product exists';
+$lang['sviat_redirects__reincarnation_open_product'] = 'Open product card';
+$lang['sviat_redirects__reincarnation_sku_missing'] = 'SKU is not specified';

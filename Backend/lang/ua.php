@@ -1,6 +1,7 @@
 <?php
 
 $lang['sviat_redirects__menu_title'] = 'Редіректи';
+$lang['sviat_redirects__save_failed'] = 'Не вдалося зберегти в БД (перевірте логи PHP та наявність таблиці sviat__redirects на цьому середовищі).';
 
 $lang['sviat_redirects__title'] = 'Редіректи';
 $lang['sviat_redirects__empty_list'] = 'Редіректів поки що немає';
@@ -28,7 +29,6 @@ $lang['sviat_redirects__added'] = 'Редірект створено';
 $lang['sviat_redirects__updated'] = 'Редірект оновлено';
 $lang['sviat_redirects__delete'] = 'Видалити редірект';
 $lang['sviat_redirects__used_url'] = 'Цей URL-джерело вже використовується в редіректі';
-$lang['sviat_redirects__save_failed'] = 'Не вдалося зберегти в БД (перевірте логи PHP та наявність таблиці sviat__redirects на цьому середовищі).';
 
 $lang['sviat_redirects__label_from'] = 'URL звідки';
 $lang['sviat_redirects__label_to'] = 'URL куди';
@@ -94,3 +94,13 @@ $lang['sviat_redirects__import_instruction_example_pattern'] = 'Приклад p
 
 $lang['sviat_redirects__yes'] = 'Так, увімкнено';
 $lang['sviat_redirects__no'] = 'Ні, вимкнено';
+
+$lang['sviat_redirects__reincarnation'] = 'Реінкарнація';
+$lang['sviat_redirects__reincarnation_hint'] = 'Перевірити URL точних редіректів за фактичними URL товарів у базі даних';
+$lang['sviat_redirects__reincarnation_running'] = 'Перевірка...';
+$lang['sviat_redirects__reincarnation_error'] = 'Не вдалося виконати перевірку редіректів';
+$lang['sviat_redirects__reincarnation_busy'] = 'Перевірка вже виконується іншим процесом';
+$lang['sviat_redirects__reincarnation_last_check'] = 'Остання перевірка';
+$lang['sviat_redirects__reincarnation_product_exists'] = 'Товар існує';
+$lang['sviat_redirects__reincarnation_open_product'] = 'Відкрити картку товару';
+$lang['sviat_redirects__reincarnation_sku_missing'] = 'артикул не вказано';

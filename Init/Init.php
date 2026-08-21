@@ -4,12 +4,16 @@
 namespace Okay\Modules\Sviat\Redirects\Init;
 
 
+use Okay\Admin\Helpers\BackendMainHelper;
 use Okay\Admin\Helpers\BackendProductsHelper;
 use Okay\Helpers\MainHelper;
 use Okay\Core\Modules\EntityField;
 use Okay\Core\Modules\AbstractInit;
+use Okay\Core\Scheduler\Schedule;
 use Okay\Modules\Sviat\Redirects\Entities\RedirectsEntity;
+use Okay\Modules\Sviat\Redirects\Extensions\RedirectsBackendExtender;
 use Okay\Modules\Sviat\Redirects\Extensions\RedirectsExtension;
+use Okay\Modules\Sviat\Redirects\Helpers\RedirectsReincarnationHelper;
 
 class Init extends AbstractInit
 {
@@ -32,6 +36,15 @@ class Init extends AbstractInit
             (new EntityField('updated_at'))->setTypeDatetime(true)->setIndex(),
             (new EntityField('last_hit_at'))->setTypeDatetime(true),
         ]);
+    }
+
+    /**
+     * Схему не чіпаємо: стан сканування живе поза базою, а SKU й лічильник
+     * меню рахуються на льоту. Метод потрібен лише як явна відмітка, що
+     * перехід на 1.1.0 міграції не має.
+     */
+    public function update_1_1_0()
+    {
     }
 
     public function init()
@@ -61,9 +74,28 @@ class Init extends AbstractInit
             ],
         ]);
 
+        // Native OkayCMS counter in the left backend menu.
+        $this->registerQueueExtension(
+            [BackendMainHelper::class, 'evensCounters'],
+            [RedirectsBackendExtender::class, 'setReincarnationMenuCounter']
+        );
+
         $this->registerQueueExtension(
             [MainHelper::class, 'setDesignDataProcedure'],
             [RedirectsExtension::class, 'redirect']
+        );
+
+        $this->registerQueueExtension(
+            [MainHelper::class, 'setDesignDataProcedure'],
+            [RedirectsExtension::class, 'scheduleReincarnationScan']
+        );
+
+        $this->registerSchedule(
+            (new Schedule([RedirectsReincarnationHelper::class, 'runScheduledScan']))
+                ->name('Sviat Redirects: reincarnation scan')
+                ->time('0 0,12 * * *')
+                ->overlap(false)
+                ->timeout(3600)
         );
 
         $this->registerQueueExtension(

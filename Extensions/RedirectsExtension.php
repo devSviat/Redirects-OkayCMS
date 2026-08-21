@@ -11,6 +11,7 @@ use Okay\Core\Router;
 use Okay\Entities\CategoriesEntity;
 use Okay\Entities\ProductsEntity;
 use Okay\Modules\Sviat\Redirects\Entities\RedirectsEntity;
+use Okay\Modules\Sviat\Redirects\Helpers\RedirectsReincarnationHelper;
 
 class RedirectsExtension implements ExtensionInterface
 {
@@ -21,14 +22,24 @@ class RedirectsExtension implements ExtensionInterface
 
     private EntityFactory $entityFactory;
     private Request $request;
+    private RedirectsReincarnationHelper $reincarnationHelper;
     private ?RedirectsEntity $redirectsEntity = null;
     private ?string $primaryHost = null;
     private ?string $scheme = null;
 
-    public function __construct(EntityFactory $entityFactory, Request $request)
-    {
+    public function __construct(
+        EntityFactory $entityFactory,
+        Request $request,
+        RedirectsReincarnationHelper $reincarnationHelper
+    ) {
         $this->entityFactory = $entityFactory;
         $this->request = $request;
+        $this->reincarnationHelper = $reincarnationHelper;
+    }
+
+    public function scheduleReincarnationScan(): void
+    {
+        $this->reincarnationHelper->scheduleIfDue();
     }
 
     public function redirect(): void
