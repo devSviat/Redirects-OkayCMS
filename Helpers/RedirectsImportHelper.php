@@ -7,7 +7,7 @@ use Okay\Modules\Sviat\Redirects\Entities\RedirectsEntity;
 
 class RedirectsImportHelper
 {
-    private const BATCH_SIZE = 500;
+    private const int BATCH_SIZE = 500;
 
     private EntityFactory $entityFactory;
 
@@ -108,9 +108,7 @@ class RedirectsImportHelper
             if ($sourceKey === '') {
                 continue;
             }
-            if (!isset($existingMap[$sourceKey])) {
-                $existingMap[$sourceKey] = $redirect;
-            }
+            $existingMap[$sourceKey] ??= $redirect;
         }
 
         $now = date('Y-m-d H:i:s');
@@ -276,7 +274,7 @@ class RedirectsImportHelper
             return $type;
         }
 
-        if (strpos($fromUrl, '$slug') !== false) {
+        if (str_contains($fromUrl, '$slug')) {
             return RedirectsEntity::TYPE_PATTERN;
         }
 

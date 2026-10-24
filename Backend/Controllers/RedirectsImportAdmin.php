@@ -7,7 +7,7 @@ use Okay\Modules\Sviat\Redirects\Helpers\RedirectsImportHelper;
 
 class RedirectsImportAdmin extends IndexAdmin
 {
-    private const TEMPLATE = 'redirects_import_admin.tpl';
+    private const string TEMPLATE = 'redirects_import_admin.tpl';
 
     public function fetch(RedirectsImportHelper $redirectsImportHelper)
     {

@@ -7,7 +7,7 @@ use Okay\Modules\Sviat\Redirects\Entities\RedirectsEntity;
 
 class RedirectsExportHelper
 {
-    private const BATCH_SIZE = 1000;
+    private const int BATCH_SIZE = 1000;
 
     private EntityFactory $entityFactory;
 
