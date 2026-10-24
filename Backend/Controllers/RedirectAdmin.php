@@ -9,7 +9,7 @@ use Okay\Modules\Sviat\Redirects\Entities\RedirectsEntity;
 
 class RedirectAdmin extends IndexAdmin
 {
-    private const TEMPLATE = 'redirect_admin.tpl';
+    private const string TEMPLATE = 'redirect_admin.tpl';
 
     public function fetch(RedirectsEntity $redirectsEntity)
     {

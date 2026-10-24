@@ -8,7 +8,7 @@ use Okay\Modules\Sviat\Redirects\Helpers\RedirectsReincarnationHelper;
 
 class RedirectsBackendExtender implements ExtensionInterface
 {
-    private const MENU_ITEM_KEY = 'sviat_redirects__menu_title';
+    private const string MENU_ITEM_KEY = 'sviat_redirects__menu_title';
 
     /** @var ManagerMenu */
     private $managerMenu;
@@ -35,7 +35,7 @@ class RedirectsBackendExtender implements ExtensionInterface
     {
         try {
             $count = $this->reincarnationHelper->getFoundCount();
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             return;
         }
 

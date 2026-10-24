@@ -8,11 +8,11 @@ use Okay\Modules\Sviat\Redirects\Helpers\RedirectsReincarnationHelper;
 
 class RedirectsAdmin extends IndexAdmin
 {
-    private const TEMPLATE = 'redirects_admin.tpl';
-    private const SESSION_LIMIT_KEY = 'sviat_redirects_limit';
-    private const DEFAULT_LIMIT = 25;
-    private const MIN_LIMIT = 5;
-    private const MAX_LIMIT = 100;
+    private const string TEMPLATE = 'redirects_admin.tpl';
+    private const string SESSION_LIMIT_KEY = 'sviat_redirects_limit';
+    private const int DEFAULT_LIMIT = 25;
+    private const int MIN_LIMIT = 5;
+    private const int MAX_LIMIT = 100;
 
     public function fetch(
         RedirectsEntity $redirectsEntity,
@@ -149,7 +149,7 @@ class RedirectsAdmin extends IndexAdmin
             return;
         }
 
-        $ids = array_map('intval', (array) $this->request->post('check'));
+        $ids = array_map(intval(...), (array) $this->request->post('check'));
         $ids = array_values(array_filter($ids));
         if (empty($ids)) {
             return;

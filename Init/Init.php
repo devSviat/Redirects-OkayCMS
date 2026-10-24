@@ -17,24 +17,24 @@ use Okay\Modules\Sviat\Redirects\Helpers\RedirectsReincarnationHelper;
 
 class Init extends AbstractInit
 {
-    private const PERMISSION = 'sviat__redirects';
+    private const string PERMISSION = 'sviat__redirects';
 
     public function install()
     {
         $this->setBackendMainController('RedirectsAdmin');
         $this->migrateEntityTable(RedirectsEntity::class, [
-            (new EntityField('id'))->setIndexPrimaryKey()->setTypeInt(11, false)->setAutoIncrement(),
-            (new EntityField('name'))->setTypeText()->setNullable(),
-            (new EntityField('from_url'))->setTypeVarchar(1024, false)->setIndexUnique(),
-            (new EntityField('to_url'))->setTypeVarchar(1024, false),
-            (new EntityField('type'))->setTypeEnum(['exact', 'pattern'])->setDefault('exact')->setIndex(),
-            (new EntityField('is_lang'))->setTypeTinyInt(1, true)->setDefault(0)->setIndex(),
-            (new EntityField('status'))->setTypeEnum(['301','302'])->setDefault('301')->setIndex(),
-            (new EntityField('enabled'))->setTypeTinyInt(1, true)->setDefault(1)->setIndex(),
-            (new EntityField('hits'))->setTypeInt(11, false)->setDefault(0),
-            (new EntityField('created_at'))->setTypeDatetime(true),
-            (new EntityField('updated_at'))->setTypeDatetime(true)->setIndex(),
-            (new EntityField('last_hit_at'))->setTypeDatetime(true),
+            new EntityField('id')->setIndexPrimaryKey()->setTypeInt(11, false)->setAutoIncrement(),
+            new EntityField('name')->setTypeText()->setNullable(),
+            new EntityField('from_url')->setTypeVarchar(1024, false)->setIndexUnique(),
+            new EntityField('to_url')->setTypeVarchar(1024, false),
+            new EntityField('type')->setTypeEnum(['exact', 'pattern'])->setDefault('exact')->setIndex(),
+            new EntityField('is_lang')->setTypeTinyInt(1, true)->setDefault(0)->setIndex(),
+            new EntityField('status')->setTypeEnum(['301','302'])->setDefault('301')->setIndex(),
+            new EntityField('enabled')->setTypeTinyInt(1, true)->setDefault(1)->setIndex(),
+            new EntityField('hits')->setTypeInt(11, false)->setDefault(0),
+            new EntityField('created_at')->setTypeDatetime(true),
+            new EntityField('updated_at')->setTypeDatetime(true)->setIndex(),
+            new EntityField('last_hit_at')->setTypeDatetime(true),
         ]);
     }
 
@@ -82,7 +82,7 @@ class Init extends AbstractInit
         );
 
         $this->registerSchedule(
-            (new Schedule([RedirectsReincarnationHelper::class, 'runScheduledScan']))
+            new Schedule([RedirectsReincarnationHelper::class, 'runScheduledScan'])
                 ->name('Sviat Redirects: reincarnation scan')
                 ->time('0 0,12 * * *')
                 ->overlap(false)

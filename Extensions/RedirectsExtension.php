@@ -15,10 +15,10 @@ use Okay\Modules\Sviat\Redirects\Helpers\RedirectsReincarnationHelper;
 
 class RedirectsExtension implements ExtensionInterface
 {
-    private const STATUS_PERMANENT = '301';
-    private const SAFE_HOST_PATTERN = '/^[a-z0-9.-]+$/';
-    private const LANGUAGE_PREFIX_PATTERN = '/^[a-z]{2}(?:-[a-z]{2})?$/';
-    private const MAX_REDIRECT_HOPS = 5;
+    private const string STATUS_PERMANENT = '301';
+    private const string SAFE_HOST_PATTERN = '/^[a-z0-9.-]+$/';
+    private const string LANGUAGE_PREFIX_PATTERN = '/^[a-z]{2}(?:-[a-z]{2})?$/';
+    private const int MAX_REDIRECT_HOPS = 5;
 
     private EntityFactory $entityFactory;
     private Request $request;
@@ -198,7 +198,7 @@ class RedirectsExtension implements ExtensionInterface
                 Router::generateUrl('product', ['url' => (string) $product->url]),
                 PHP_URL_PATH
             );
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             return (string) (!empty($product->slug_url) ? $product->slug_url : $product->url);
         }
     }
@@ -210,7 +210,7 @@ class RedirectsExtension implements ExtensionInterface
                 Router::generateUrl('category', ['url' => (string) $category->url]),
                 PHP_URL_PATH
             );
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             return (string) (!empty($category->slug_url) ? $category->slug_url : $category->path_url);
         }
     }
@@ -338,7 +338,7 @@ class RedirectsExtension implements ExtensionInterface
     private function extractLanguageContext(string $path): array
     {
         $path = $this->normalizePath($path);
-        if ($path === '' || strpos($path, '/') === false) {
+        if ($path === '' || !str_contains($path, '/')) {
             return [
                 'prefix' => null,
                 'base_path' => null,
@@ -392,25 +392,25 @@ class RedirectsExtension implements ExtensionInterface
             return null;
         }
 
-        if (strpos($fromTemplate, '$slug') !== false) {
+        if (str_contains($fromTemplate, '$slug')) {
             $slug = $this->extractSlugByTemplate($requestPath, $fromTemplate);
             if ($slug === null) {
                 return null;
             }
 
-            if (strpos($targetTemplate, '$slug') !== false) {
+            if (str_contains($targetTemplate, '$slug')) {
                 return $this->normalizePath(str_replace('$slug', $slug, $targetTemplate));
             }
 
             return $targetTemplate;
         }
 
-        if (strpos($requestPath, $fromTemplate) !== 0) {
+        if (!str_starts_with($requestPath, $fromTemplate)) {
             return null;
         }
 
         $suffix = ltrim(substr($requestPath, strlen($fromTemplate)), '/');
-        if (strpos($targetTemplate, '$slug') !== false) {
+        if (str_contains($targetTemplate, '$slug')) {
             if ($suffix === '') {
                 return null;
             }
@@ -431,11 +431,11 @@ class RedirectsExtension implements ExtensionInterface
         $left = $parts[0];
         $right = $parts[1];
 
-        if ($left !== '' && strpos($requestPath, $left) !== 0) {
+        if ($left !== '' && !str_starts_with($requestPath, $left)) {
             return null;
         }
 
-        if ($right !== '' && substr($requestPath, -strlen($right)) !== $right) {
+        if ($right !== '' && !str_ends_with($requestPath, $right)) {
             return null;
         }
 
@@ -598,7 +598,7 @@ class RedirectsExtension implements ExtensionInterface
         }
 
         // Handle bracketed IPv6 host: [::1]:8080 -> ::1
-        if (strpos($host, '[') === 0) {
+        if (str_starts_with($host, '[')) {
             $endBracketPos = strpos($host, ']');
             if ($endBracketPos !== false) {
                 return substr($host, 1, $endBracketPos - 1);
@@ -607,7 +607,7 @@ class RedirectsExtension implements ExtensionInterface
         }
 
         // Strip port if present: localhost:8080 -> localhost
-        if (strpos($host, ':') !== false) {
+        if (str_contains($host, ':')) {
             $parts = explode(':', $host, 2);
             return $parts[0];
         }
@@ -617,9 +617,7 @@ class RedirectsExtension implements ExtensionInterface
 
     private function getRedirectsEntity(): RedirectsEntity
     {
-        if ($this->redirectsEntity === null) {
-            $this->redirectsEntity = $this->entityFactory->get(RedirectsEntity::class);
-        }
+        $this->redirectsEntity ??= $this->entityFactory->get(RedirectsEntity::class);
 
         return $this->redirectsEntity;
     }

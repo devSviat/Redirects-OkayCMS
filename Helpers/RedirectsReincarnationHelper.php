@@ -12,8 +12,8 @@ class RedirectsReincarnationHelper
 {
     public const SCAN_INTERVAL_SECONDS = 43200;
 
-    private const BATCH_SIZE = 500;
-    private const SCHEDULER_POLL_SECONDS = 900;
+    private const int BATCH_SIZE = 500;
+    private const int SCHEDULER_POLL_SECONDS = 900;
 
     private EntityFactory $entityFactory;
     private ?RedirectsEntity $redirectsEntity = null;
@@ -45,7 +45,7 @@ class RedirectsReincarnationHelper
 
             try {
                 $this->scan(false);
-            } catch (\Throwable $e) {
+            } catch (\Throwable) {
                 // A background check must never break a storefront request.
             }
         });
@@ -195,7 +195,7 @@ class RedirectsReincarnationHelper
 
     public function forgetRedirects(array $ids): void
     {
-        $ids = array_values(array_unique(array_filter(array_map('intval', $ids))));
+        $ids = array_values(array_unique(array_filter(array_map(intval(...), $ids))));
         if (empty($ids)) {
             return;
         }
@@ -319,7 +319,7 @@ class RedirectsReincarnationHelper
      */
     private function findProductSkus(array $productIds): array
     {
-        $productIds = array_values(array_unique(array_filter(array_map('intval', $productIds))));
+        $productIds = array_values(array_unique(array_filter(array_map(intval(...), $productIds))));
         if (empty($productIds)) {
             return [];
         }
@@ -368,7 +368,7 @@ class RedirectsReincarnationHelper
         }
 
         $redirectIds = array_values(array_unique(array_filter(array_map(
-            'intval',
+            intval(...),
             array_keys($state['matches'])
         ))));
         if (empty($redirectIds)) {
@@ -429,7 +429,7 @@ class RedirectsReincarnationHelper
             $path = parse_url((string) $generatedUrl, PHP_URL_PATH);
 
             return is_string($path) ? $path : '';
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             return (string) ($product->url ?? '');
         }
     }
@@ -603,9 +603,7 @@ class RedirectsReincarnationHelper
 
     private function getRedirectsEntity(): RedirectsEntity
     {
-        if ($this->redirectsEntity === null) {
-            $this->redirectsEntity = $this->entityFactory->get(RedirectsEntity::class);
-        }
+        $this->redirectsEntity ??= $this->entityFactory->get(RedirectsEntity::class);
 
         return $this->redirectsEntity;
     }
