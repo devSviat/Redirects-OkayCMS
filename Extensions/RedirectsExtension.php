@@ -86,6 +86,8 @@ class RedirectsExtension implements ExtensionInterface
             return;
         }
 
+        $liveUrls = $this->collectUrlsKeptByOtherProducts($productsEntity, $products, $productIds);
+
         $categoriesEntity = $this->entityFactory->get(CategoriesEntity::class);
         $redirectsEntity = $this->getRedirectsEntity();
         $fallbackCategories = $this->collectFallbackCategoryIds($categoriesEntity, $productIds);
@@ -93,6 +95,10 @@ class RedirectsExtension implements ExtensionInterface
 
         $redirectCandidates = [];
         foreach ($products as $product) {
+            if (isset($liveUrls[(string) $product->url])) {
+                continue;
+            }
+
             $sourcePath = $this->normalizePath($this->buildProductPath($product));
             if ($sourcePath === '') {
                 continue;
@@ -131,7 +137,33 @@ class RedirectsExtension implements ExtensionInterface
         $this->persistMissingRedirects($redirectsEntity, $redirectCandidates, $existingSources);
     }
 
-    private function persistMissingRedirects(
+    /**
+     * Дубль із чужим url: після видалення адресу далі віддає інший товар, а редирект
+     * спрацьовує раніше за рендер і ховав би живу сторінку.
+     *
+     * @return array<string, true>
+     */
+    private function collectUrlsKeptByOtherProducts(ProductsEntity $productsEntity, array $products, array $productIds): array
+    {
+        $urls = array_values(array_unique(array_filter(array_map(
+            static fn($product) => (string) $product->url,
+            $products
+        ))));
+        if (empty($urls)) {
+            return [];
+        }
+
+        $kept = [];
+        foreach ($productsEntity->find(['url' => $urls, 'limit' => count($urls) + count($productIds)]) as $owner) {
+            if (!in_array((int) $owner->id, $productIds, true)) {
+                $kept[(string) $owner->url] = true;
+            }
+        }
+
+        return $kept;
+    }
+
+        private function persistMissingRedirects(
         RedirectsEntity $redirectsEntity,
         array $redirectCandidates,
         array $existingSources
