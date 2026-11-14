@@ -1,7 +1,7 @@
 <?php
 
 $lang['sviat_redirects__menu_title'] = 'Редіректи';
-$lang['sviat_redirects__save_failed'] = 'Не вдалося зберегти в БД (перевірте логи PHP та наявність таблиці sviat__redirects на цьому середовищі).';
+$lang['sviat_redirects__save_failed'] = 'Не вдалося зберегти в БД (перевірте логи PHP та наявність таблиці sviat__redirects у цьому середовищі).';
 
 $lang['sviat_redirects__title'] = 'Редіректи';
 $lang['sviat_redirects__empty_list'] = 'Редіректів поки що немає';
@@ -13,14 +13,14 @@ $lang['sviat_redirects__export'] = 'Експорт';
 $lang['sviat_redirects__import_title'] = 'Імпорт редіректів з CSV';
 $lang['sviat_redirects__import_submit'] = 'Імпортувати';
 $lang['sviat_redirects__import_download_template'] = 'Завантажити шаблон';
-$lang['sviat_redirects__import_hint'] = 'Завантажте CSV-файл. Підтримуються розділювачі "," або ";".';
+$lang['sviat_redirects__import_hint'] = 'Завантажте CSV-файл. Підтримуються роздільники "," або ";".';
 $lang['sviat_redirects__import_columns'] = 'Колонки: from_url, to_url, name, status, enabled, is_lang (обов\'язкові: from_url, to_url).';
 $lang['sviat_redirects__import_done'] = 'Імпорт завершено';
 $lang['sviat_redirects__import_upload_error'] = 'Не вдалося завантажити CSV-файл';
 $lang['sviat_redirects__import_total'] = 'Рядків у файлі';
 $lang['sviat_redirects__import_created'] = 'Додано';
 $lang['sviat_redirects__import_updated'] = 'Оновлено';
-$lang['sviat_redirects__import_update_existing'] = 'Оновлювати існуючі редіректи за from_url';
+$lang['sviat_redirects__import_update_existing'] = 'Оновлювати наявні редіректи за from_url';
 $lang['sviat_redirects__import_duplicates'] = 'Пропущено дублікатів';
 $lang['sviat_redirects__import_invalid'] = 'Пропущено некоректних';
 $lang['sviat_redirects__back_to_list'] = 'До списку редіректів';
@@ -74,10 +74,10 @@ $lang['sviat_redirects__instruction_prefix_fixed_text'] = 'Якщо $slug вка
 $lang['sviat_redirects__instruction_is_lang_title'] = 'Мультимовність';
 $lang['sviat_redirects__instruction_is_lang_text'] = 'Якщо увімкнено, правило без префікса мови працює і для /en, /ua та інших мовних URL.';
 $lang['sviat_redirects__instruction_priority_title'] = 'Важливо:';
-$lang['sviat_redirects__instruction_priority_text'] = 'якщо підходять обидва правила, спрацює Точний (exact).';
+$lang['sviat_redirects__instruction_priority_text'] = 'якщо підходять обидва правила, спрацює «Точний (exact)».';
 
 
-$lang['sviat_redirects__import_instruction_format'] = 'Файл має бути у форматі CSV (розділювач ; або ,).';
+$lang['sviat_redirects__import_instruction_format'] = 'Файл має бути у форматі CSV (роздільник ; або ,).';
 $lang['sviat_redirects__import_instruction_header'] = 'Перший рядок — заголовок';
 $lang['sviat_redirects__import_instruction_required'] = 'Обовʼязково заповнюйте: from_url і to_url.';
 $lang['sviat_redirects__import_instruction_relative_urls'] = 'URL вказуйте без домену (наприклад: old-page, catalog/new-page).';
