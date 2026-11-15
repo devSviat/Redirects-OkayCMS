@@ -3,6 +3,7 @@
 namespace Okay\Modules\Sviat\Redirects\Helpers;
 
 use Okay\Core\EntityFactory;
+use Okay\Modules\Sviat\Redirects\Export\FormulaSafeCsv;
 use Okay\Modules\Sviat\Redirects\Entities\RedirectsEntity;
 
 class RedirectsExportHelper
@@ -24,7 +25,7 @@ class RedirectsExportHelper
         }
 
         fwrite($stream, "\xEF\xBB\xBF");
-        fputcsv($stream, [
+        FormulaSafeCsv::putRow($stream, [
             'from_url',
             'to_url',
             'name',
@@ -35,7 +36,7 @@ class RedirectsExportHelper
             'last_hit_at',
             'created_at',
             'updated_at',
-        ], ';', '"', '');
+        ], ';');
 
         $redirectsEntity = $this->entityFactory->get(RedirectsEntity::class);
         $page = 1;
@@ -47,7 +48,7 @@ class RedirectsExportHelper
             ]);
 
             foreach ($rows as $row) {
-                fputcsv($stream, [
+                FormulaSafeCsv::putRow($stream, [
                     (string) ($row->from_url ?? ''),
                     (string) ($row->to_url ?? ''),
                     (string) ($row->name ?? ''),
@@ -58,7 +59,7 @@ class RedirectsExportHelper
                     (string) ($row->last_hit_at ?? ''),
                     (string) ($row->created_at ?? ''),
                     (string) ($row->updated_at ?? ''),
-                ], ';', '"', '');
+                ], ';');
             }
 
             $page++;

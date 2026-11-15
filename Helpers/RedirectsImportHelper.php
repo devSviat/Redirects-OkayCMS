@@ -3,6 +3,7 @@
 namespace Okay\Modules\Sviat\Redirects\Helpers;
 
 use Okay\Core\EntityFactory;
+use Okay\Modules\Sviat\Redirects\Export\FormulaSafeCsv;
 use Okay\Modules\Sviat\Redirects\Entities\RedirectsEntity;
 
 class RedirectsImportHelper
@@ -210,9 +211,9 @@ class RedirectsImportHelper
             $multilingual = $this->normalizeEnabled($this->getRowValue($row, $headerMap, 'is_lang'));
             $type = $this->normalizeType($this->getRowValue($row, $headerMap, 'type'), $urlFrom);
         } else {
-            $urlFrom = trim((string) ($row[0] ?? ''));
-            $urlTo = trim((string) ($row[1] ?? ''));
-            $name = trim((string) ($row[2] ?? ''));
+            $urlFrom = FormulaSafeCsv::unescapeValue(trim((string) ($row[0] ?? '')));
+            $urlTo = FormulaSafeCsv::unescapeValue(trim((string) ($row[1] ?? '')));
+            $name = FormulaSafeCsv::unescapeValue(trim((string) ($row[2] ?? '')));
             $status = $this->normalizeStatus((string) ($row[3] ?? RedirectsEntity::STATUS_301));
             $enabled = $this->normalizeEnabled((string) ($row[4] ?? '1'));
             $multilingual = $this->normalizeEnabled((string) ($row[5] ?? '0'));
@@ -242,7 +243,7 @@ class RedirectsImportHelper
             return '';
         }
 
-        return trim((string) ($row[$headerMap[$field]] ?? ''));
+        return FormulaSafeCsv::unescapeValue(trim((string) ($row[$headerMap[$field]] ?? '')));
     }
 
     private function normalizePath(string $path): string
