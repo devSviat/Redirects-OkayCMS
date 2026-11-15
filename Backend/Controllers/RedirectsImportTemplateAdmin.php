@@ -3,6 +3,7 @@
 namespace Okay\Modules\Sviat\Redirects\Backend\Controllers;
 
 use Okay\Admin\Controllers\IndexAdmin;
+use Okay\Modules\Sviat\Redirects\Export\FormulaSafeCsv;
 
 class RedirectsImportTemplateAdmin extends IndexAdmin
 {
@@ -21,10 +22,10 @@ class RedirectsImportTemplateAdmin extends IndexAdmin
         }
 
         fwrite($stream, "\xEF\xBB\xBF");
-        fputcsv($stream, ['from_url', 'to_url', 'name', 'status', 'enabled', 'is_lang', 'type'], ';', '"', '');
-        fputcsv($stream, ['old-page', 'new-page', 'Example redirect', '301', '1', '0', 'exact'], ';', '"', '');
-        fputcsv($stream, ['category/$slug', 'products/$slug', 'Pattern example', '301', '1', '0', 'pattern'], ';', '"', '');
-        fputcsv($stream, ['old-category/product-1', 'catalog/new-category', 'Multilingual example', '301', '1', '1', 'exact'], ';', '"', '');
+        FormulaSafeCsv::putRow($stream, ['from_url', 'to_url', 'name', 'status', 'enabled', 'is_lang', 'type'], ';');
+        FormulaSafeCsv::putRow($stream, ['old-page', 'new-page', 'Example redirect', '301', '1', '0', 'exact'], ';');
+        FormulaSafeCsv::putRow($stream, ['category/$slug', 'products/$slug', 'Pattern example', '301', '1', '0', 'pattern'], ';');
+        FormulaSafeCsv::putRow($stream, ['old-category/product-1', 'catalog/new-category', 'Multilingual example', '301', '1', '1', 'exact'], ';');
 
         rewind($stream);
         $csv = (string) stream_get_contents($stream);
