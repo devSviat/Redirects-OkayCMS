@@ -4,7 +4,6 @@
 namespace Okay\Modules\Sviat\Redirects\Init;
 
 
-use Okay\Admin\Helpers\BackendFeaturesValuesMergeHelper;
 use Okay\Admin\Helpers\BackendMainHelper;
 use Okay\Admin\Helpers\BackendProductsHelper;
 use Okay\Helpers\MainHelper;
@@ -12,7 +11,6 @@ use Okay\Core\Modules\EntityField;
 use Okay\Core\Modules\AbstractInit;
 use Okay\Core\Scheduler\Schedule;
 use Okay\Modules\Sviat\Redirects\Entities\RedirectsEntity;
-use Okay\Modules\Sviat\Redirects\Extensions\FeatureValuesMergeRedirectsExtension;
 use Okay\Modules\Sviat\Redirects\Extensions\RedirectsBackendExtender;
 use Okay\Modules\Sviat\Redirects\Extensions\RedirectsExtension;
 use Okay\Modules\Sviat\Redirects\Helpers\RedirectsReincarnationHelper;
@@ -95,14 +93,6 @@ class Init extends AbstractInit
             ['class' => BackendProductsHelper::class, 'method' => 'delete'],
             ['class' => RedirectsExtension::class, 'method' => 'createProductDeleteRedirects']
         );
-
-        // Злиття значень властивостей є лише в ядрі форку.
-        if (class_exists(BackendFeaturesValuesMergeHelper::class)) {
-            $this->registerChainExtension(
-                ['class' => BackendFeaturesValuesMergeHelper::class, 'method' => 'storeRedirects'],
-                ['class' => FeatureValuesMergeRedirectsExtension::class, 'method' => 'storeFeatureValuesMergeRedirects']
-            );
-        }
 
         $this->extendUpdateObject(
             'Sviat.Redirects.RedirectsEntity',
