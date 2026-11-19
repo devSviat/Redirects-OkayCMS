@@ -6,7 +6,6 @@ use Okay\Core\EntityFactory;
 use Okay\Core\ManagerMenu;
 use Okay\Core\OkayContainer\Reference\ServiceReference as SR;
 use Okay\Core\Request;
-use Okay\Modules\Sviat\Redirects\Extensions\FeatureValuesMergeRedirectsExtension;
 use Okay\Modules\Sviat\Redirects\Extensions\RedirectsBackendExtender;
 use Okay\Modules\Sviat\Redirects\Extensions\RedirectsExtension;
 use Okay\Modules\Sviat\Redirects\Helpers\RedirectsExportHelper;
@@ -14,12 +13,6 @@ use Okay\Modules\Sviat\Redirects\Helpers\RedirectsImportHelper;
 use Okay\Modules\Sviat\Redirects\Helpers\RedirectsReincarnationHelper;
 
 return [
-    FeatureValuesMergeRedirectsExtension::class => [
-        'class' => FeatureValuesMergeRedirectsExtension::class,
-        'arguments' => [
-            new SR(EntityFactory::class),
-        ],
-    ],
     RedirectsBackendExtender::class => [
         'class' => RedirectsBackendExtender::class,
         'arguments' => [
